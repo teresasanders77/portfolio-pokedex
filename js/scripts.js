@@ -1,4 +1,8 @@
-alert('Hello world');
+var pokemonList = {
+	var venusaur = {
+		name: 'Venusaur',
+		height: 2,
+		types: ['grass','poison']
+	}
 
-var favoriteFood= "cheese";
-document.write(favoriteFood);
+}
