@@ -15,6 +15,6 @@ var pokemonList = [
 		types: ['steel','bug'],
 	},
 ];
-for ( let i = 0; i < pokemonList.length; i++) {
-  document.write('<h2>' + pokemonList[i].name + '</h2>' + ' Height: ' + pokemonList[i].height)
+for ( var i = 0; i < pokemonList.length; i++) {
+  document.write('<p>' + pokemonList[i].name  + ' \(height: ' + pokemonList[i].height + '\)' + '<p>')
 }
