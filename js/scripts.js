@@ -5,9 +5,9 @@ var pokemonList = [
 		types: ['grass','poison'],
 	},
 {
-		name: 'Zapdos',
-		height: 2,
-		types: ['electric','flying'],
+		name: 'Volcarona',
+		height: 1.6,
+		types: ['fire','bug'],
 	},
 {
 		name: 'Escavalier',
@@ -16,5 +16,8 @@ var pokemonList = [
 	},
 ];
 for ( var i = 0; i < pokemonList.length; i++) {
-  document.write('<p>' + pokemonList[i].name  + ' \(height: ' + pokemonList[i].height + '\)' + '<p>')
+  document.write('<p>' + pokemonList[i].name  + ' \(height: ' + pokemonList[i].height + '\)')
+	if (pokemonList[i].height >= 2) {
+		document.write('- Wow, that\'s big!' + '<p>' )
+	}
 }
