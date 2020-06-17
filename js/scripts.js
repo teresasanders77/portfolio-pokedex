@@ -16,9 +16,11 @@ var pokemonList = [
 	},
 ];
 
-for ( var i = 0; i < pokemonList.length; i++) {
-  document.write('<p>' + pokemonList[i].name  + ' \(height: ' + pokemonList[i].height + '\)')
-	if (pokemonList[i].height >= 2) {
+function myLoopFunction(pokemon) {
+	document.write('<p>' + pokemon.name + ' \(height: ' + pokemon.height + '\)')
+	if (pokemon.height >= 2) {
 		document.write('- Wow, that\'s big!' + '<p>' )
 	}
 }
+pokemonList.forEach(myLoopFunction);
+
