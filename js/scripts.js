@@ -19,7 +19,7 @@ var pokemonRepository = (function () {
 
 function add(pokemon) {
   if (typeof pokemon === 'object') {
-    return pokemonList.push(pokemon);
+    pokemonList.push(pokemon);
   }
 }
 
