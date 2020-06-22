@@ -5,3 +5,18 @@ body {
   font-size: 16px;
   line-height: 1.6;
 }
+
+.button {
+  list-style-type: none;
+}
+
+.list-button {
+  background-color: #fff;
+  width: 30%;
+  height: 50px;
+  border-radius: 5px;
+  color: black;
+  text-align: left;
+  border: #000 solid 1px;
+  cursor: pointer;
+}
