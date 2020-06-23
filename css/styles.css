@@ -6,13 +6,14 @@ body {
   line-height: 1.6;
 }
 
+/*removes bullet points from list*/
 .button {
   list-style-type: none;
 }
 
 .list-button {
   background-color: #fff;
-  width: 30%;
+  width: 15em;
   height: 50px;
   border-radius: 5px;
   color: black;
