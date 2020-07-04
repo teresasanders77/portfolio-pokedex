@@ -35,6 +35,13 @@ $button.addEventListener('click', function(event) {
   })
 }
 
+function showDetails(item) {
+  pokemonRepository.loadDetails(item).then(function() {
+    console.log(item);
+    showModal(item);
+  });
+}
+
 //function to load list from api
 function loadList() {
   return fetch(apiUrl).then(function (response) {
@@ -69,11 +76,59 @@ function loadDetails(item) {
 }
 
 //function to console.log details
-function showDetails(item) {
-  pokemonRepository.loadDetails(item).then(function () {
-    console.log(item);
-  });
+function showModal(item) {
+  var $modalContainer = document.querySelector('#modal-container');
+ 
+  // Clear all existing modal content 
+  $modalContainer.innerHTML = '';
+
+  var modal = document.createElement('div');
+  modal.classList.add('modal');
+  
+  //Add the new modal content
+  var closeButtonElement = document.createElement('button');
+  closeButtonElement.classList.add('modal-close');
+  closeButtonElement.innerText = 'Close';
+  closeButtonElement.addEventListener('click', hideModal);
+
+  var nameElement = document.createElement('h1');
+  nameElement.innerText = item.name;
+
+  var heightElement = document.createElement('p');
+  heightElement.innerText = 'height : ' + item.height + 'm';
+
+  var imageElement = document.createElement('img');
+  imageElement.classList.add('modal-img');
+  imageElement.setAttribute('src', item.imageUrl);
+
+  modal.appendChild(closeButtonElement);
+  modal.appendChild(nameElement);
+  modal.appendChild(heightElement);
+  modal.appendChild(imageElement);
+  $modalContainer.appendChild(modal);
+  
+  $modalContainer.classList.add('is-visible');
 }
+
+function hideModal() {
+  var modalContainer = document.querySelector('#modal-container');
+  $modalContainer.classList.remove('is-visible');
+}
+
+window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
+  });
+
+var $modalContainer = document.querySelector ('#modal-container');
+$modalContainer.addEventListener('click', (e) => {
+    //Closes if the user clicks directly on the overlay
+  var target = e.target;
+  if (target === modalContainer) {
+    hideModal();
+    }
+  });
 
 //returns values that can be accessed to outside the IIFE
 return {
@@ -82,8 +137,10 @@ return {
   addListItem: addListItem,
   loadList: loadList,
   loadDetails: loadDetails,
-  showDetails: showDetails
-  };
+  showDetails: showDetails,
+  showModal: showModal,
+  hideModal: hideModal
+  };  
 })();
 
 //forEach function to list pokemon by name on buttons 
