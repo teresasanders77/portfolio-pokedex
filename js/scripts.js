@@ -69,7 +69,7 @@ function loadDetails(item) {
   }).then(function (details) {
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
-    item.types = Object.keys(detail.types);
+    item.types = Object.keys(details.types);
   }).catch(function (error) {
     console.error(error);
   });
@@ -116,7 +116,7 @@ function hideModal() {
 }
 
 window.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+    if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
       hideModal();
     }
   });
@@ -125,7 +125,7 @@ var $modalContainer = document.querySelector ('#modal-container');
 $modalContainer.addEventListener('click', (e) => {
     //Closes if the user clicks directly on the overlay
   var target = e.target;
-  if (target === modalContainer) {
+  if (target === $modalContainer) {
     hideModal();
     }
   });
