@@ -45,7 +45,7 @@ function showDetails(item) {
 function loadList() {
   return fetch(apiUrl).then(function (response) {
     return response.json();
-    //if promse is resolved, the following is run
+//if promse is resolved, the following is run
   }).then(function (json) {
     json.results.forEach(function (item) {
       var pokemon = {
@@ -54,7 +54,7 @@ function loadList() {
       };
       add(pokemon);
     });
-    //if promise is rejected, the following is run
+//if promise is rejected, the following is run
   }).catch(function (error) {
     console.error(error);
   })
@@ -69,11 +69,12 @@ function loadDetails(item) {
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
     item.weight = details.weight;
+//loop for each type of pokemon
     item.types = [];
     for (var i = 0; i < details.types.length; i++) {
       item.types.push(details.types[i].type.name);
     }
-
+//loop for the abilities of each pokemon 
     item.abilities = [];
     for (var i = 0; i < details.abilities.length; i++) {
       item.abilities.push(details.abilities[i].ability.name);
@@ -83,17 +84,15 @@ function loadDetails(item) {
   });
 }
 
-//function to console.log details
+//function to show Modal
 function showModal(item) {
   var $modalContainer = document.querySelector('#modal-container');
- 
-  // Clear all existing modal content 
+ // Clear all existing modal content 
   $modalContainer.innerHTML = '';
 
   var modal = document.createElement('div');
   modal.classList.add('modal');
-  
-  //Add the new modal content
+//Add the new modal content
   var closeButtonElement = document.createElement('button');
   closeButtonElement.classList.add('modal-close');
   closeButtonElement.innerText = 'Close';
@@ -117,7 +116,7 @@ function showModal(item) {
   var imageElement = document.createElement('img');
   imageElement.classList.add('modal-img');
   imageElement.setAttribute('src', item.imageUrl);
-
+//append modal content to page 
   modal.appendChild(closeButtonElement);
   modal.appendChild(nameElement);
   modal.appendChild(heightElement);
@@ -126,30 +125,28 @@ function showModal(item) {
   modal.appendChild(abilitiesElement);
   modal.appendChild(imageElement);
   $modalContainer.appendChild(modal);
-  
+//add class to show modal
   $modalContainer.classList.add('is-visible');
 }
-
+//function to hide modal
 function hideModal() {
   var modalContainer = document.querySelector('#modal-container');
   $modalContainer.classList.remove('is-visible');
 }
-
+//adds event listener when ESC is clicked
 window.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
       hideModal();
     }
   });
-
+//adds event listener if clicking outside of modal
 var $modalContainer = document.querySelector ('#modal-container');
 $modalContainer.addEventListener('click', (e) => {
-    //Closes if the user clicks directly on the overlay
   var target = e.target;
   if (target === $modalContainer) {
     hideModal();
     }
   });
-
 //returns values that can be accessed to outside the IIFE
 return {
   add: add,
@@ -162,7 +159,6 @@ return {
   hideModal: hideModal
   };  
 })();
-
 //forEach function to list pokemon by name on buttons 
 pokemonRepository.loadList().then(function() {
   pokemonRepository.getAll().forEach(function(pokemon) {
