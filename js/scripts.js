@@ -37,7 +37,6 @@ $button.addEventListener('click', function(event) {
 
 function showDetails(item) {
   pokemonRepository.loadDetails(item).then(function() {
-    console.log(item);
     showModal(item);
   });
 }
@@ -69,7 +68,16 @@ function loadDetails(item) {
   }).then(function (details) {
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
-    item.types = Object.keys(details.types);
+    item.weight = details.weight;
+    item.types = [];
+    for (var i = 0; i < details.types.length; i++) {
+      item.types.push(details.types[i].type.name);
+    }
+
+    item.abilities = [];
+    for (var i = 0; i < details.abilities.length; i++) {
+      item.abilities.push(details.abilities[i].ability.name);
+    }
   }).catch(function (error) {
     console.error(error);
   });
@@ -97,6 +105,15 @@ function showModal(item) {
   var heightElement = document.createElement('p');
   heightElement.innerText = 'height : ' + item.height + 'm';
 
+  var weightElement = document.createElement('p');
+  weightElement.innerText = 'weight : ' + item.weight + 'kg';
+
+  var typesElement = document.createElement('p');
+  typesElement.innerText = 'types : ' + item.types;
+
+  var abilitiesElement = document.createElement('p');
+  abilitiesElement.innerText = 'abilities : ' + item.abilities;
+
   var imageElement = document.createElement('img');
   imageElement.classList.add('modal-img');
   imageElement.setAttribute('src', item.imageUrl);
@@ -104,6 +121,9 @@ function showModal(item) {
   modal.appendChild(closeButtonElement);
   modal.appendChild(nameElement);
   modal.appendChild(heightElement);
+  modal.appendChild(weightElement);
+  modal.appendChild(typesElement);
+  modal.appendChild(abilitiesElement);
   modal.appendChild(imageElement);
   $modalContainer.appendChild(modal);
   
